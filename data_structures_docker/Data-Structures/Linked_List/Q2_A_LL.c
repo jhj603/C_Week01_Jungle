@@ -105,6 +105,7 @@ void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
 {
     /* add your code here */
 	ListNode *cur_ll1 = ll1->head, *cur_ll2 = ll2->head;
+	int count = 0
 
 	if ((NULL == cur_ll1) || (NULL == cur_ll2))
 		return;
@@ -115,12 +116,14 @@ void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
 		cur_ll2->next = cur_ll1->next;
 		cur_ll1->next = cur_ll2;
 
-		--ll2->size;
-		++ll1->size;
+		++count;
 
 		cur_ll1 = cur_ll2->next;
 		cur_ll2 = ll2->head;
 	}
+
+	ll1->size += count;
+	ll2->size -= count;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
