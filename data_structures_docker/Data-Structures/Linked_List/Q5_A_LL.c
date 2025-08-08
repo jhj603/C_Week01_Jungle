@@ -54,6 +54,8 @@ int main()
 	resultBackList.head = NULL;
 	resultBackList.size = 0;
 
+	c = 1;
+
 	printf("1: Insert an integer to the linked list:\n");
 	printf("2: Split the linked list into two linked lists, frontList and backList:\n");
 	printf("0: Quit:\n");
@@ -103,6 +105,61 @@ int main()
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
 	/* add your code here */
+	if ((NULL == ll) || (NULL == ll->head) || (NULL == resultFrontList) || (NULL == resultBackList))
+		return;
+		
+	if (NULL == ll->head->next)
+	{
+		resultFrontList->head = ll->head;
+		resultFrontList->size = 1;
+
+		resultBackList->head = NULL;
+		resultBackList->size = 0;
+
+		ll->head = NULL;
+		ll->size = 0;
+
+		return;
+	}
+
+	ListNode *temp, *pre_left = NULL, *left = ll->head, *right = ll->head;
+	int size;
+
+	while ((NULL != right) && (NULL != right->next))
+	{
+		pre_left = left;
+		left = left->next;
+		right = right->next->next;
+	}
+
+	if ((NULL != pre_left))
+		pre_left->next = NULL;
+
+	resultFrontList->head = ll->head;
+	resultBackList->head = left;
+
+	ll->head = NULL;
+	ll->size = 0;
+
+	size = 0;
+
+	temp = resultFrontList->head;
+	while (NULL != temp)
+	{
+		++size;
+		temp = temp->next;
+	}
+	resultFrontList->size = size;
+
+	size = 0;
+
+	temp = resultBackList->head;
+	while(NULL != temp)
+	{
+		temp = temp->next;
+		++size;
+	}
+	resultBackList->size = size;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
