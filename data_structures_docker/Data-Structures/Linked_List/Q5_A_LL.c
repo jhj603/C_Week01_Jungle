@@ -132,11 +132,22 @@ void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, Linke
 		right = right->next->next;
 	}
 
-	if ((NULL != pre_left))
-		pre_left->next = NULL;
+	if (ll->size % 2)
+	{
+		resultFrontList->head = ll->head;
+		resultBackList->head = left->next;
 
-	resultFrontList->head = ll->head;
-	resultBackList->head = left;
+		if (NULL != left)
+			left->next = NULL;		
+	}
+	else
+	{
+		if (NULL != pre_left)
+			pre_left->next = NULL;
+
+		resultFrontList->head = ll->head;
+		resultBackList->head = left;
+	}
 
 	ll->head = NULL;
 	ll->size = 0;
