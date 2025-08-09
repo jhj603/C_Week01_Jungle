@@ -120,11 +120,24 @@ void createQueueFromLinkedList(LinkedList *ll, Queue *q)
 	if ((NULL == ll) || (NULL == q))
 		return;
 
-	q->ll.head = ll->head;
-	q->ll.size = ll->size;
+	if (!isEmptyQueue(q))
+		removeAllItemsFromQueue(q);
 
-	ll->head = NULL;
-	ll->size = 0;
+	// 큐 인터페이스 사용 방식
+	ListNode* cur = ll->head;
+
+	while (NULL != cur)
+	{
+		enqueue(q, cur->item);
+		cur = cur->next;
+	}
+
+	// 단순 포인터 조작 방식 - 큐의 캡슐화 위반, 큐 라이브러리의 내부 구현에서만 사용 권장
+	// q->ll.head = ll->head;
+	// q->ll.size = ll->size;
+
+	// ll->head = NULL;
+	// ll->size = 0;
 }
 
 void removeOddValues(Queue *q)
@@ -133,27 +146,39 @@ void removeOddValues(Queue *q)
 	if ((NULL == q) || !(q->ll.size))
 		return;
 	
-	ListNode *next, *pre = NULL, *cur = q->ll.head;
+	// 큐 인터페이스 사용 방식 - 큐의 원칙 준수 목표, 성능은 떨어질 수 있음
+	int item, q_size = q->ll.size;
 
-	while (NULL != cur)
+	for (int i = 0; i < q_size; ++i)
 	{
-		next = cur->next;
+		item = dequeue(q);
 
-		if (cur->item % 2)
-		{
-			if (NULL == pre)
-				q->ll.head = cur->next;
-			else
-				pre->next = cur->next;
-
-			--q->ll.size;
-			free(cur);
-		}
-		else
-			pre = cur;
-		
-		cur = next;
+		if (!(item % 2))
+			enqueue(q, item);
 	}
+
+	// 포인터 직접 조작 방식 - 성능 최우선 목표, 큐의 캡슐화 위반, 큐 라이브러리의 내부 구현에서만 사용 권장
+	// ListNode *next, *pre = NULL, *cur = q->ll.head;
+
+	// while (NULL != cur)
+	// {
+	// 	next = cur->next;
+
+	// 	if (cur->item % 2)
+	// 	{
+	// 		if (NULL == pre)
+	// 			q->ll.head = cur->next;
+	// 		else
+	// 			pre->next = cur->next;
+
+	// 		--q->ll.size;
+	// 		free(cur);
+	// 	}
+	// 	else
+	// 		pre = cur;
+		
+	// 	cur = next;
+	// }
 }
 
 //////////////////////////////////////////////////////////////////////////////////

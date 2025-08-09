@@ -114,11 +114,60 @@ int main()
 void createStackFromLinkedList(LinkedList *ll, Stack *s)
 {
     /* add your code here */
+	if ((NULL == ll) || (NULL == s))
+		return;
+
+	if (!isEmptyStack(s))
+		removeAllItemsFromStack(s);
+
+	// 스택 인터페이스 사용 방식 - 원본 리스트를 파괴하지 않고 새로운 노드 추가하면서 데이터 복사
+	ListNode *cur;
+
+	cur = ll->head;
+
+	while (NULL != cur)
+	{
+		push(s, cur->item);
+
+		cur = cur->next;
+	}
 }
 
 void removeEvenValues(Stack *s)
 {
 	/* add your code here */
+	if ((NULL == s) || isEmptyStack(s))
+		return;
+
+	// 스택 인터페이스 사용 방식
+	int item;
+	Stack temp_s;
+
+	temp_s.ll.head = NULL;
+	temp_s.ll.size = 0;
+
+	while (!isEmptyStack(s))
+	{
+		item = pop(s);
+
+		if (item % 2)
+			push(&temp_s, item);
+	}
+
+	while (!isEmptyStack(&temp_s))
+	{
+		item = pop(&temp_s);
+
+		push(s, item);
+	}
+
+	// 재귀 방식 - 캡슐화를 유지하면서 메모리 효율성이 높고 간결하다
+	// int item = pop(s);
+
+	// removeEvenValues(s);
+
+	// if (item % 2)
+	// 	push(s, item);
 }
 
 //////////////////////////////////////////////////////////////////////////////////
