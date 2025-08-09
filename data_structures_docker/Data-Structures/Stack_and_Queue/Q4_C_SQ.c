@@ -112,7 +112,21 @@ int main()
 
 void reverse(Queue *q)
 {
-/* add your code here */
+	/* add your code here */
+	if ((NULL == q) || isEmptyQueue(q))
+		return;
+
+	// 스택을 이용한 방법
+	Stack temp_stack;
+	
+	temp_stack.ll.head = temp_stack.ll.tail = NULL;
+	temp_stack.ll.size = 0;
+
+	while (!isEmptyQueue(q))
+		push(&temp_stack, dequeue(q));
+	
+	while (!isEmptyStack(&temp_stack))
+		enqueue(q, pop(&temp_stack));
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
