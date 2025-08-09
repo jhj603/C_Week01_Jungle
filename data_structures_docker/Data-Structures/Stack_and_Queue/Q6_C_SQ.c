@@ -111,7 +111,34 @@ int main()
 
 void removeUntil(Stack *s, int value)
 {
-/* add your code here */
+	/* add your code here */
+	if ((NULL == s) || isEmptyStack(s))
+		return;
+
+	// 스택 인터페이스 사용
+	int item;
+
+	while (!isEmptyStack(s))
+	{
+		item = pop(s);
+
+		if (value == item)
+		{
+			push(s, item);
+			break;
+		}
+	}
+	
+	// 재귀 사용
+	// int item = pop(s);
+
+	// if (value == item)
+	// {
+	// 	push(s, item);
+	// 	return;
+	// }
+
+	// removeUntil(s, value);
 }
 
 //////////////////////////////////////////////////////////////////////////////////
