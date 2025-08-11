@@ -110,18 +110,28 @@ int isStackPairwiseConsecutive(Stack *s)
 	if (s->ll.size % 2)
 		return 0;
 
+	Stack temp_stack;
 	int first, second, original_size = s->ll.size;
 
-	for (int i = 0; i < original_size; i += 2)
+	temp_stack.ll.head = temp_stack.ll.tail = NULL;
+	temp_stack.ll.size = 0;
+
+	while (!isEmptyStack(s))
 	{
 		first = pop(s);
 		second = pop(s);
 
-		push(s, second);
-		push(s, first);
+		push(&temp_stack, first);
+		push(&temp_stack, second);
 
 		if (1 != abs(first - second))
 			return 0;
+	}
+
+	while (!isEmptyStack(&temp_stack))
+	{
+		push(s, pop(&temp_stack));
+		push(s, pop(&temp_stack));
 	}
 
 	return 1;

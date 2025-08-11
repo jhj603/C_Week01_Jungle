@@ -105,19 +105,19 @@ void RecursiveReverse(ListNode **ptrHead)
 
 	//(*ptrHead) = Recursive(*ptrHead);
 
-	ListNode *pre = NULL, *cur = *ptrHead, *next = NULL;
+	ListNode *pre_node = NULL, *cur_node = *ptrHead, *next_node = NULL;
 
-	while (NULL != cur)
+	while (NULL != cur_node)
 	{
-		next = cur->next;
+		next_node = cur_node->next;
 
-		cur->next = pre;
+		cur_node->next = pre_node;
 
-		pre = cur;
-		cur = next;
+		pre_node = cur_node;
+		cur_node = next_node;
 	}
 
-	*ptrHead = pre;
+	*ptrHead = pre_node;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

@@ -99,7 +99,7 @@ void inOrderTraversal(BSTNode *root)
 
 	inorder_stack.top = NULL;
 
-	while ((NULL != cur) || (!isEmpty(&inorder_stack)))
+	while ((NULL != cur) || !isEmpty(&inorder_stack))
 	{
 		while (NULL != cur)
 		{
