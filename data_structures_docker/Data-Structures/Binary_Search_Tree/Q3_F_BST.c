@@ -81,7 +81,6 @@ int main()
 			printf("Choice unknown;\n");
 			break;
 		}
-
 	}
 
 	return 0;
@@ -91,7 +90,27 @@ int main()
 
 void preOrderIterative(BSTNode *root)
 {
-	 /* add your code here */
+	/* add your code here */
+	if (NULL == root)
+		return;
+
+	Stack preorder_stack;
+	BSTNode* cur = NULL;
+
+	preorder_stack.top = NULL;
+
+	push(&preorder_stack, root);
+	while((NULL == cur) || !isEmpty(&preorder_stack))
+	{
+		cur = pop(&preorder_stack);
+
+		printf("%d ", cur->item);
+
+		if (NULL != cur->right)
+			push(&preorder_stack, cur->right);
+		if (NULL != cur->left)
+			push(&preorder_stack, cur->left);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

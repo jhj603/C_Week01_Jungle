@@ -95,11 +95,9 @@ void inOrderTraversal(BSTNode *root)
 		return;
 
 	Stack inorder_stack;
-	BSTNode *cur = NULL;
+	BSTNode *cur = root;
 
 	inorder_stack.top = NULL;
-
-	cur = root;
 
 	while ((NULL != cur) || (!isEmpty(&inorder_stack)))
 	{
