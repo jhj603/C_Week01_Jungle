@@ -109,12 +109,35 @@ void mirrorTree(BTNode *node)
     if (NULL == node)
         return;
 
+    // 재귀 풀이
     BTNode* temp = node->left;
     node->left = node->right;
     node->right = temp;
 
     mirrorTree(node->left);
     mirrorTree(node->right);
+
+    // 스택 풀이
+    // Stack stack;
+    // BTNode *cur = NULL, *temp = NULL;
+
+    // stack.top = NULL;
+
+    // push(&stack, node);
+
+    // while (NULL != stack.top)
+    // {
+    //     cur = pop(&stack);
+
+    //     if (NULL != cur->left)
+    //         push(&stack, cur->left);
+    //     if (NULL != cur->right)
+    //         push(&stack, cur->right);
+
+    //     temp = cur->left;
+    //     cur->left = cur->right;
+    //     cur->right = temp;
+    // }
 }
 
 //////////////////////////////////////////////////////////////////////////////////
