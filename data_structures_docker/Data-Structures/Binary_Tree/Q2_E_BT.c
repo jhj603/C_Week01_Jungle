@@ -106,7 +106,7 @@ int maxHeight(BTNode *node)
     l = maxHeight(node->left);
     r = maxHeight(node->right);
 
-    return (l > r) ? l + 1 : r + 1;
+    return ((l > r) ? l : r) + 1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

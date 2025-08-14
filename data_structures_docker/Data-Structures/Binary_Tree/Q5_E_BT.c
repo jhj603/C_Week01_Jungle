@@ -117,6 +117,12 @@ void mirrorTree(BTNode *node)
     mirrorTree(node->left);
     mirrorTree(node->right);
 
+
+
+
+
+
+    
     // 스택 풀이
     // Stack stack;
     // BTNode *cur = NULL, *temp = NULL;
